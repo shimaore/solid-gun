@@ -5,25 +5,12 @@ Ref IDs
 
 ## Time
 
-- Year, base 62 (2+)
-- Month, base 12 (1)
-- Day, base 32 (1)
-- Hour, base 12 (1)
-- Minute, base 60 (1)
-
     Moment = require 'moment'
 
-    @time = ->
-      date = Moment()
-      [
-        base62.encode date.year()            # 2
-        base62.encode date.month()+1         # 1
-        base62.encode date.date()            # 1
-        base62.encode date.hours()           # 1
-        base62.encode date.minutes()         # 1
-      ].join ''
-
-      # total length: 6
+    @time = (date) ->
+      unixstamp = if date? then Moment(date).unix() else Moment().unix()
+      base62.encode unixstamp // 6
+      # total length: 5, encodes 20 times per minute
 
 ## Uniqueness
 
@@ -33,15 +20,11 @@ Ref IDs
     @uniqueness = ->
       r = crypto.randomBytes(3)
       p = ((r[0]>>6)<<0) + ((r[1]>>6)<<2) + ((r[2]>>6)<<4)
-      console.log p
       [
         dic64[r[0] & 63]
         dic64[r[1] & 63]
         dic64[r[2] & 63]
         dic64[p]
-        # base62.encode date.seconds()         # 1
-        # base62.encode date.milliseconds()    # 2
-        # process.env.SYSTEM_ID ? ''           # 1+
       ].join ''
 
-      # total length: 4
+      # total length: 4, 24 bits of randomness
