@@ -10,7 +10,7 @@ Ref IDs
     @time = (date) ->
       unixstamp = if date? then Moment(date).unix() else Moment().unix()
       base62.encode unixstamp // 6
-      # total length: 5, encodes 20 times per minute
+      # total length: 5, encodes 10 times per minute
 
 ## Uniqueness
 
