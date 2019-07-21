@@ -4,21 +4,21 @@
   "description": "Build IDs for CCNQ4 call references",
   "main": "index.js",
   "scripts": {
-    "prepublish": "coffee -c *.coffee.md",
-    "pretest": "npm run prepublish",
-    "test": "mocha"
+    "prepublishOnly": "coffee -c *.coffee.md",
+    "pretest": "npm run prepublishOnly && coffee -c test/*.coffee.md",
+    "test": "nyc mocha"
   },
   "author": "Stéphane Alnet <stephane@shimaore.net> (https://stephane.shimaore.net/)",
   "license": "Unlicense",
   "devDependencies": {
-    "chai": "^4.1.1",
-    "coffee-coverage": "^2.0.1",
-    "coffee-script": "^1.12.7",
-    "mocha": "^3.5.0"
+    "chai": "^4.2.0",
+    "coffeescript": "^2.4.1",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1"
   },
   "dependencies": {
-    "base-p": "^1.0.0",
-    "moment": "^2.18.1"
+    "base-p": "^2.0.0",
+    "moment": "^2.24.0"
   },
   "repository": {
     "type": "git",
