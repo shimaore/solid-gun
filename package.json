@@ -4,7 +4,7 @@
   "description": "Build IDs for CCNQ4 call references",
   "main": "index.js",
   "scripts": {
-    "prepublishOnly": "coffee -c *.coffee.md",
+    "prepublishOnly": "npm install --only=dev && coffee -c *.coffee.md",
     "pretest": "npm run prepublishOnly && coffee -c test/*.coffee.md",
     "test": "nyc mocha"
   },
